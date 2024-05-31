@@ -1,0 +1,9 @@
+{
+    "packages": ["pandas", "tabulate", "Jinja2"],
+    "files": {
+        "{PATH}" : "/Users/bencliff/Documents/bento_test",
+        "/my_text.txt": "my_text.txt",
+        "/upload_file1.csv": "upload_file1.csv",
+        "/upload_file4.csv": "upload_file4.csv"
+    }
+}
