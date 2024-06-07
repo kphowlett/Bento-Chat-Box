@@ -15,4 +15,5 @@ df = utils.upload_df('upload_file4.csv')
 pyscript.display(df.style.hide(axis='index'), )
 
 
-pyscript.display("download size of preview: " + utils.get_download_attrs(df))
+pyscript.display("Download Size of Preview: " + utils.get_download_attrs(df))
+pyscript.display('Number of Cases: ' + str(df.shape[0]))
