@@ -13,11 +13,10 @@
 
     <!-- This script tag bootstraps PyScript -->
     <script defer type="module" src="https://pyscript.net/releases/2024.5.2/core.js"></script>
-    <!-- <script defer src="https://pyscript.net/alpha/pyscript.js"></script> -->
     
-    <!-- <style>
+    <style>
         #loading {outline: none; border: none; background: transparent}
-    </style> -->
+    </style>
     <script type="module">
         const loading = document.getElementById('loading');
         addEventListener('py:ready', () => loading.close());
@@ -33,12 +32,6 @@
     <!-- Displaying all cases upon initialization  -->
     <script type="py" src="./app.py" config="./pyscript.json" class="py-0" style="display:none"></script>
     
-
-    
-    
-    
 </body>
-<!-- <p></p> -->
-<!-- <p id="headers"></p> -->
 
 </html>
