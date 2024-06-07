@@ -13,7 +13,7 @@ def filter_df(df, column, criteria):
 # Returns the size in MB of the current dataframe on the page
 def get_download_attrs(df):
     import sys
-    return str('{}MB').format(sys.getsizeof(df))
+    return str('{:9.4f}MB').format(sys.getsizeof(df) / 1000000)
 
 def upload_df(file):
     df = pd.read_csv(file, encoding="UTF-8", index_col=False)
