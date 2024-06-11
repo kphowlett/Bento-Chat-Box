@@ -1,1 +1,13 @@
 .venv
+
+/bin
+
+/lib
+
+/include
+
+/share
+
+/access
+
+*.cfg
