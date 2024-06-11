@@ -6,6 +6,7 @@ import bento_data
 df = upload_df('upload_file4.csv')
 new_df = bento_data.datahandler(df, df.shape)
 
+
 # Displaying metrics of the data
 # pyscript.display("Download Size of Preview: " + utils.get_download_attrs(df))
 # pyscript.display('Number of Cases: ' + str(utils.get_shape(df)))
