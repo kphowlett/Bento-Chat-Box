@@ -1,1 +1,0 @@
-print("Hello from my-worker-code")
