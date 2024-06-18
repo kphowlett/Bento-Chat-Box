@@ -1,9 +1,11 @@
 {
-    "packages": ["pandas", "tabulate", "Jinja2"],
+    "packages": ["pandas", "Jinja2"],
     "files": {
         "{PATH}" : "/Users/bencliff/Documents/bento_test",
         "/upload_file4.csv": "upload_file4.csv",
         "/utils.py": "utils.py",
-        "/bento_data.py": "bento_data.py"
+        "/bento_data.py": "bento_data.py",
+        "/get_session_input.py": "get_session_input.py",
+        "/access/aws_access.py": "access/aws_access.py"
     }
 }
