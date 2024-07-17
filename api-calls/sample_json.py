@@ -1,4 +1,5 @@
 import requests
+import json
 
 # GraphQL endpoint URL
 url = 'https://bento-tools.org/v1/graphql/'
@@ -36,3 +37,7 @@ try:
     print(result)
 except requests.exceptions.RequestException as e:
     print(f"An error occurred: {e}")
+
+# Convert and write JSON object to file
+with open(bento_data.json", "w") as outfile: 
+    json.dump(result, outfile)
