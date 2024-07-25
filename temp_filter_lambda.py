@@ -140,84 +140,72 @@ def dispatch(intent_request):
 
 
 def lambda_handler(event, context):
-    """
-    Route the incoming request based on intent.
-    The JSON body of the request is provided in the event slot.
-    """
-    # By default, treat the user request
-    
-    obj = S3.get_object(Bucket = bucket_name , Key = file_name)
-    my_df = pd.read_csv(obj['Body'])
-    
-    intent = event['sessionState']['intent']['name']
+    try:
+        obj = S3.get_object(Bucket=bucket_name, Key=file_name)
+        my_df = pd.read_csv(obj['Body'])
 
-    # bot = event['sessionState']['bot']['name']
-    # slots = event['sessionState']['intent']['slots']
+        intent = event['sessionState']['intent']['name']
 
-    if(intent == 'PerformView'):
-        # Construct the response for Lex
-        return {
-        "sessionState": {
-            'dialogAction': {
-                'type': 'Close'
+        if intent == 'PerformView':
+            return {
+                "sessionState": {
+                    'dialogAction': {
+                        'type': 'Close'
+                    },
+                    "intent": {
+                        "confirmationState": "Confirmed",
+                        "name": "PerformView",
+                        "state": "Fulfilled"
+                    }
                 },
-            "intent": {
-                "confirmationState": "Confirmed",
-                "name": "PerformView",
-                "state": "Fulfilled"
-                }
-            },
-        'messages': [
-            {
-                'contentType': 'PlainText',
-                'content': str(my_df)
-            }
-            ]
-        }
-    elif(intent == 'PerformFilter'):
-        # filter_df = pd.read_csv(obj['Body'])
-        
-        slots = event['sessionState']['intent']['slots']
-        field = slots['Field']['value']['interpretedValue']
-        arm1 = slots['ArmButtonSelect1']['value']['interpretedValue']
-        arm2 = slots['ArmButtonSelect2']['value']['interpretedValue']
-        
-        # arms = [arm1,arm2]
-        # filtered_df = my_df[my_df['field'] in arms]]
-        # new_df = filter_df
-    
-        return {
-        "sessionState": {
-            'dialogAction': {
-                'type': 'Close'
-            },
-            "intent": {
-                "confirmationState": "Confirmed",
-                "name": "PerformFilter",
-                "state": "Fulfilled"
-            }
-        },
-        'messages': [
-            
-            {
-                'contentType': 'PlainText',
-                'content': str(arm1)
-            },
-            {
-                'contentType': 'PlainText',
-                'content': str(arm2)
-            },
-            {
-                'contentType': 'PlainText',
-                'content': str(field)
+                'messages': [
+                    {
+                        'contentType': 'PlainText',
+                        'content': str(my_df)
+                    }
+                ]
             }
 
-            ]
-        }
-    else:
-        return {
-        "messages":[
-            {'contentType': 'PlainText',
-                'content': 'Failure here'
-            }]
-        }
+        elif intent == 'PerformFilter':
+            slots = event['sessionState']['intent']['slots']
+            field = slots['Field']['value']['interpretedValue']
+            arm1 = slots['ArmButtonSelect1']['value']['interpretedValue']
+            arm2 = slots['ArmButtonSelect2']['value']['interpretedValue']
+            arms = [arm1, arm2]
+            
+            
+            return {
+                "sessionState": {
+                    'dialogAction': {
+                        'type': 'Close'
+                    },
+                    "intent": {
+                        "confirmationState": "Confirmed",
+                        "name": "PerformFilter",
+                        "state": "Fulfilled"
+                    }
+                },
+                'messages': [
+                    {
+                        'contentType': 'PlainText',
+                        'content': str(my_df)
+                    },
+                    {
+                        'contentType': 'PlainText',
+                        'content': str(arm1)
+                    },
+                    {
+                        'contentType': 'PlainText',
+                        'content': str(arm2)
+                    }
+                ]
+            }
+        else:
+            return {
+                "messages": [
+                    {
+                        'contentType': 'PlainText',
+                        'content': 'Failure here'
+                    }
+                ]
+            }
