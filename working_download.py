@@ -52,6 +52,10 @@ def lambda_handler(event, context):
             {
                 'contentType': 'PlainText',
                 'content': str(my_df.describe(include='all'))
+            },
+            {
+                'contentType': 'CustomPayload',
+                'content': 'https://bento-chat-bucket.s3.amazonaws.com/fileOverview.csv'
             }
             ]
         }
@@ -69,7 +73,7 @@ def lambda_handler(event, context):
         
         new_df = my_df[my_df[field].isin([arm1, arm2])]
         new_df.to_csv(csv_buffer)
-        s3_resource.Object('bento-chat-bucket', 'df.csv').put(Body=csv_buffer.getvalue())
+        s3_resource.Object('bento-chat-bucket', 'filterResult.csv').put(Body=csv_buffer.getvalue())
         
         
         
@@ -102,7 +106,7 @@ def lambda_handler(event, context):
             },
             {
                 'contentType': 'CustomPayload',
-                'content': 'https://bento-chat-bucket.s3.amazonaws.com/df.csv'
+                'content': 'https://bento-chat-bucket.s3.amazonaws.com/filterResult.csv'
             }
             ]
         }
